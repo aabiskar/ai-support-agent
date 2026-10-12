@@ -1,0 +1,26 @@
+# Python generated files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Backup and generated archives
+*.bak
+*.zip
+
+# Local editor and OS files
+.DS_Store
+.vscode/
+
+# Local AgentCore state
+.bedrock_agentcore/
+
+# Local Playwright debugging artifacts
+playwright-arm64/
