@@ -1,0 +1,31 @@
+
+⚠️ Recommendation: The Starter Toolkit CLI is no longer supported.
+   Please use the AgentCore CLI (@aws/agentcore) to create, develop, and deploy agents on Amazon Bedrock AgentCore.
+   New Bedrock AgentCore features are only accessible in the AgentCore CLI.
+
+   To uninstall this starter toolkit, run: pip uninstall bedrock-agentcore-starter-toolkit
+   To install the AgentCore CLI: npm install -g @aws/agentcore
+   To import existing agents, run: agentcore import
+   Set AGENTCORE_SUPPRESS_RECOMMENDATION=1 to silence this warning.
+
+╭────────────────────────────────────────────────────────────────── main ──────────────────────────────────────────────────────────────────╮
+│ Session: memory-test-session-B-20261014-xyz                                                                                              │
+│ Request ID: 48ee39c5-e2b6-4470-a2e8-30e80c60be2b                                                                                         │
+│ ARN: arn:aws:bedrock-agentcore:us-east-1:315642819774:runtime/main-A5qT3d5wjN                                                            │
+│ Logs: aws logs tail /aws/bedrock-agentcore/runtimes/main-A5qT3d5wjN-DEFAULT --log-stream-name-prefix "2026/10/14/[runtime-logs]"         │
+│ --follow                                                                                                                                 │
+│       aws logs tail /aws/bedrock-agentcore/runtimes/main-A5qT3d5wjN-DEFAULT --log-stream-name-prefix "2026/10/14/[runtime-logs]" --since │
+│ 1h                                                                                                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Response:
+According to the customer support knowledge base, Platinum loyalty members receive these benefits:
+
+- Free same-day shipping
+- 15% discount on purchases
+- Priority customer support
+
+These benefits are higher than what Gold members receive (which are free expedited shipping and a 10% discount). As Jane is currently a Gold
+tier member with 4,250 points who just earned an additional 150 points, she needs 400 more points to reach the Platinum tier and unlock 
+these enhanced benefits.
+

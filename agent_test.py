@@ -59,7 +59,7 @@ async def main():
         ),
     )
 
-    result = agent("What is the status of order ORD-002?")
+    result = agent("Check the refund status for refund ID TEST-REFUND-001.")
 
     print("\nRESULT:")
     print(result)

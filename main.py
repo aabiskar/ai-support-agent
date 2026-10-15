@@ -1,4 +1,4 @@
-﻿"""
+"""
 Customer Support AI Agent — Starter Code
 ==========================================
 Your task is to complete this file by implementing all sections marked
@@ -167,31 +167,44 @@ class MemoryHook(HookProvider):
         self.session_id = session_id
         self.memory_client = memory_client
         self.memory_id = memory_id
-        self.namespaces = {
-            "SEMANTIC": "cs_agent/{actorId}/facts",
-            "USER_PREFERENCE": "cs_agent/{actorId}/preferences",
-        }
-
+        self.namespaces = get_namespaces(memory_client, memory_id)
 
 
     def retrieve_customer_context(self, event: MessageAddedEvent):
+        logger.warning("MEMORY RETRIEVAL HOOK FIRED")
+
         message = event.message
+        logger.warning(
+            "MEMORY EVENT: role=%s content_type=%s",
+            message.get("role"),
+            type(message.get("content")).__name__,
+        )
 
         if message.get("role") != "user":
+            logger.warning("MEMORY RETRIEVAL SKIPPED: message is not from user")
             return
 
         content_blocks = message.get("content")
         if not isinstance(content_blocks, list) or not content_blocks:
+            logger.warning("MEMORY RETRIEVAL SKIPPED: no content blocks")
             return
 
         text_block = content_blocks[0]
         if not isinstance(text_block, dict) or not isinstance(
             text_block.get("text"), str
         ):
+            logger.warning("MEMORY RETRIEVAL SKIPPED: first block has no text")
             return
 
         query = text_block["text"]
+        logger.warning("MEMORY QUERY TEXT: %s", query)
         memories = []
+
+        logger.warning(
+            "MEMORY RETRIEVAL START: actor=%s namespaces=%s",
+            self.actor_id,
+            list(self.namespaces.keys()),
+        )
 
         for strategy_type, ns_template in self.namespaces.items():
             namespace = ns_template.replace(
@@ -206,12 +219,15 @@ class MemoryHook(HookProvider):
                     top_k=5,
                 )
 
+                logger.warning(
+                    "MEMORY SEARCH RESULT: strategy=%s count=%d namespace=%s",
+                    strategy_type,
+                    len(retrieved),
+                    namespace,
+                )
+
                 for mem in retrieved:
                     if not isinstance(mem, dict):
-                        continue
-
-                    score = mem.get("score", 0)
-                    if not isinstance(score, (int, float)) or score < 0.5:
                         continue
 
                     content = mem.get("content", {})
@@ -224,11 +240,11 @@ class MemoryHook(HookProvider):
                     if mem_text:
                         memories.append(f"[{strategy_type}] {mem_text}")
 
-            except Exception as e:
-                logger.error(
-                    "Failed to retrieve memories for %s: %s",
+            except Exception:
+                logger.exception(
+                    "Failed to retrieve memories for strategy=%s namespace=%s",
                     strategy_type,
-                    e,
+                    namespace,
                 )
 
         if memories:
@@ -238,11 +254,18 @@ class MemoryHook(HookProvider):
                 + "\n\nUser Request:\n"
                 + query
             )
+            logger.warning(
+                "MEMORY CONTEXT INJECTED: count=%d",
+                len(memories),
+            )
+        else:
+            logger.warning("MEMORY CONTEXT NOT INJECTED: no usable memories found")
 
 
 
     def save_support_interaction(self, event: AfterInvocationEvent):
         """Save the completed turn to memory after the agent responds."""
+        logger.warning("MEMORY SAVE HOOK FIRED")
         messages = event.agent.messages
         customer_query = None
 
@@ -281,6 +304,12 @@ class MemoryHook(HookProvider):
                     for block in content
                     if isinstance(block, dict) and block.get("text")
                 ).strip()
+
+        logger.warning(
+            "MEMORY SAVE DATA: query=%s response=%s",
+             bool(customer_query),
+              bool(agent_response),
+        )
 
         if customer_query and agent_response:
             try:
@@ -379,7 +408,10 @@ def search_knowledge_base(query: str) -> str:
 
 @tool
 def calculate_loyalty_discount(
-    order_subtotal: float, loyalty_tier: str, points_available: int
+    order_subtotal: float,
+    loyalty_tier: str,
+    points_available: int,
+    product_category: str = "standard",
 ) -> str:
     """
     Calculate customer loyalty discount and final order total using
@@ -389,6 +421,7 @@ def calculate_loyalty_discount(
         order_subtotal: The initial subtotal of the order.
         loyalty_tier: The customer's loyalty tier (Silver, Gold, or Platinum).
         points_available: The number of loyalty points available.
+        product_category: Product category: standard, device, or fresh.
 
     Returns:
         JSON string containing the calculation results.
@@ -404,8 +437,9 @@ subtotal = {order_subtotal}
 tier = {json.dumps(loyalty_tier)}
 points = {points_available}
 
-# Standard order earns 1 point per $1 spent.
-points_earned = int(subtotal * earn_rates["standard"])
+# Earn points according to product category.
+category = {json.dumps(product_category.lower())}
+earn_rate = earn_rates.get(category, earn_rates["standard"])
 
 # Points can cover at most 50% of the subtotal.
 # 1 point = $0.01.
@@ -425,6 +459,7 @@ tier_rate = tier_rates.get(tier, 0.00)
 tier_discount = after_points * tier_rate
 
 final_total = max(0.0, after_points - tier_discount)
+points_earned = int(final_total * earn_rate)
 total_savings = points_discount + tier_discount
 
 remaining_points = points - points_redeemed + points_earned
@@ -434,6 +469,7 @@ print(json.dumps({{
     "points_redeemed": points_redeemed,
     "remaining_points": remaining_points,
     "points_discount": round(points_discount, 2),
+    "tier_discount_pct": round(tier_rate * 100, 2),
     "tier_discount": round(tier_discount, 2),
     "final_total": round(final_total, 2),
     "total_savings": round(total_savings, 2)
@@ -473,10 +509,56 @@ print(json.dumps({{
 
             return json.dumps({"error": "Code Interpreter returned no text result."})
 
+    
     except Exception as e:
-        logger.error(f"Error calculating loyalty discount: {e}")
-        return json.dumps({"error": str(e)})
+        logger.warning(
+            f"Code Interpreter unavailable; using tier-discount fallback: {e}"
+        )
 
+        tier_rates = {
+            "Silver": 0.00,
+            "Gold": 0.10,
+            "Platinum": 0.15,
+        }
+
+        try:
+            subtotal = float(order_subtotal)
+            points = int(points_available)
+
+            if subtotal < 0 or points < 0:
+                return json.dumps({
+                    "error": "Subtotal and available points cannot be negative."
+                })
+
+            tier_rate = tier_rates.get(loyalty_tier, 0.00)
+            tier_discount = round(subtotal * tier_rate, 2)
+            final_total = round(subtotal - tier_discount, 2)
+
+            return json.dumps({
+                "fallback_used": True,
+                "calculation_scope": "tier_discount_only",
+                "order_subtotal": round(subtotal, 2),
+                "loyalty_tier": loyalty_tier,
+                "tier_discount_pct": round(tier_rate * 100, 2),
+                "tier_discount": tier_discount,
+                "final_total": final_total,
+                "points_earned": 0,
+                "points_redeemed": 0,
+                "remaining_points": points,
+                "note": (
+                    "Points redemption and balance calculation are "
+                    "unavailable because Code Interpreter failed."
+                )
+            })
+
+        except (TypeError, ValueError):
+            logger.exception("Tier-discount fallback failed.")
+            return json.dumps({
+                "error": "Invalid input for tier-discount fallback."
+            })
+
+    
+        
 
 # ── TODO 8 — Agent Entrypoint ─────────────────────────────────────────────────
 # Implement the invoke() function decorated with @app.entrypoint.
@@ -543,6 +625,11 @@ async def invoke(payload, context=None):
             "and answer the question directly. "
             "Do NOT assume that mentioning an order means the customer wants a return or refund. "
             "Only use refund tools when the customer explicitly asks for a refund or return. "
+            "Before initiating a refund, retrieve the order using the order-tracking tool "
+            "and identify the actual order amount from the returned order details. "
+            "The order-tracking tool returns the order price in the 'total' field. "
+            "When calling initiate_refund, pass that exact numeric value as the 'amount' argument. "
+            "Never initiate a refund with an amount of $0.00 when the actual order amount is available. "
             "For customer information, use the customer tools. "
             "For product information or company policies, use the knowledge base. "
             "For loyalty discount calculations, use the loyalty discount tool. "

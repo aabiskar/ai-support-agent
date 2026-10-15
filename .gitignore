@@ -24,3 +24,18 @@ venv/
 
 # Local Playwright debugging artifacts
 playwright-arm64/
+# Local AWS resource output
+ed -n 244,305p main.py
+
+# Local backups and test outputs
+.bedrock_agentcore.yaml.backup
+main.py.memory-backup
+api-target-trace.txt
+calculator-fallback-evidence.txt
+lambda-target-trace.txt
+memory-events.txt
+lambda-payload.json
+lambda-response.json
+payload.json
+test-bedrock.json
+target.json
