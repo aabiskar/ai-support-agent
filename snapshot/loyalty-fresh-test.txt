@@ -1,0 +1,29 @@
+
+⚠️ Recommendation: The Starter Toolkit CLI is no longer supported.
+   Please use the AgentCore CLI (@aws/agentcore) to create, develop, and deploy agents on Amazon Bedrock AgentCore.
+   New Bedrock AgentCore features are only accessible in the AgentCore CLI.
+
+   To uninstall this starter toolkit, run: pip uninstall bedrock-agentcore-starter-toolkit
+   To install the AgentCore CLI: npm install -g @aws/agentcore
+   To import existing agents, run: agentcore import
+   Set AGENTCORE_SUPPRESS_RECOMMENDATION=1 to silence this warning.
+
+╭─────────────────────────────────────────────────────────────────────────────────────────────────── main_direct_test ───────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Session: 62877b82-5755-46af-bc0f-9c2d2c88483c                                                                                                                                                                          │
+│ Request ID: 0bcc87d2-f0db-4035-891a-3d3e323fa695                                                                                                                                                                       │
+│ ARN: arn:aws:bedrock-agentcore:us-east-1:315642819774:runtime/main_direct_test-FcD8jSCwiz                                                                                                                              │
+│ Logs: aws logs tail /aws/bedrock-agentcore/runtimes/main_direct_test-FcD8jSCwiz-DEFAULT --log-stream-name-prefix "2026/10/16/[runtime-logs" --follow                                                                   │
+│       aws logs tail /aws/bedrock-agentcore/runtimes/main_direct_test-FcD8jSCwiz-DEFAULT --log-stream-name-prefix "2026/10/16/[runtime-logs" --since 1h                                                                 │
+│ GenAI Dashboard: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-observability/agent-core                                                                                                       │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Response:
+The loyalty discount calculation for your $150 fresh-product order is complete. Here are the exact values returned by the tool:
+
+- Points redeemed: 4,000
+- Points discount: $40.00
+- Gold tier discount: $11.00 (10% of $110 after points discount)
+- Final total: $99.00
+- Points earned: 495 (using fresh-category earn rate)
+- Remaining points: 745
+- Total savings: $51.00
