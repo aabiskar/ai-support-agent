@@ -1,0 +1,31 @@
+
+⚠️ Recommendation: The Starter Toolkit CLI is no longer supported.
+   Please use the AgentCore CLI (@aws/agentcore) to create, develop, and deploy agents on Amazon Bedrock AgentCore.
+   New Bedrock AgentCore features are only accessible in the AgentCore CLI.
+
+   To uninstall this starter toolkit, run: pip uninstall bedrock-agentcore-starter-toolkit
+   To install the AgentCore CLI: npm install -g @aws/agentcore
+   To import existing agents, run: agentcore import
+   Set AGENTCORE_SUPPRESS_RECOMMENDATION=1 to silence this warning.
+
+╭─────────────────────────────────────────────────────────────────────────────────────────────────── main_direct_test ───────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Session: 62877b82-5755-46af-bc0f-9c2d2c88483c                                                                                                                                                                          │
+│ Request ID: 383e6283-f20e-4a63-9c05-63400d85aec5                                                                                                                                                                       │
+│ ARN: arn:aws:bedrock-agentcore:us-east-1:315642819774:runtime/main_direct_test-FcD8jSCwiz                                                                                                                              │
+│ Logs: aws logs tail /aws/bedrock-agentcore/runtimes/main_direct_test-FcD8jSCwiz-DEFAULT --log-stream-name-prefix "2026/10/16/[runtime-logs" --follow                                                                   │
+│       aws logs tail /aws/bedrock-agentcore/runtimes/main_direct_test-FcD8jSCwiz-DEFAULT --log-stream-name-prefix "2026/10/16/[runtime-logs" --since 1h                                                                 │
+│ GenAI Dashboard: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#gen-ai-observability/agent-core                                                                                                       │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Response:
+Based on your Gold membership status and 4,250 loyalty points, here's the discount calculation for your $150 standard order:
+
+- **Points discount**: $40.00 (using 4,000 points)
+- **Tier discount percentage**: 10%
+- **Tier discount amount**: $11.00
+- **Final total**: $99.00
+- **Points earned from final total**: 99 points
+- **Remaining points**: 349 points
+- **Total savings**: $51.00
+
+Your loyalty benefits have been applied correctly, showing both the points discount and tier discount as calculated by the system.
