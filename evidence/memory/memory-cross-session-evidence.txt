@@ -1,0 +1,24 @@
+CROSS-SESSION MEMORY TEST EVIDENCE
+
+Actor/customer ID:
+CUST-MEM-CROSSSESSION-20261016
+
+Session A:
+memory-test-session-A
+
+Session B:
+memory-test-session-B
+
+Session A saved the user's preference for metric measurement units.
+The AgentCore Memory store subsequently contained:
+- SEMANTIC memory: preference for metric units
+- USER_PREFERENCE memory: metric units for measurements
+
+Session B retrieval evidence:
+- SEMANTIC search returned 1 result.
+- USER_PREFERENCE search returned 1 result.
+- Memory context injected: 2 memories.
+- The agent recalled the preference for metric units, including kilometers, meters, and kilograms.
+
+Scope:
+This demonstrates cross-session retrieval through the local Strands MemoryHook using AgentCore Memory. It is not, by itself, proof of a deployed AgentCore Runtime test.

@@ -1,0 +1,206 @@
+[
+  {
+    "test": "API Gateway order lookup",
+    "expected_tool": "order-tracker___get_order",
+    "prompt": "Use the order lookup tool to retrieve order ORD-001. Report the returned order status, item, and tracking details. Do not invent any values.",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "text": "Use the order lookup tool to retrieve order ORD-001. Report the returned order status, item, and tracking details. Do not invent any values."
+          }
+        ],
+        "tracking_id": "5bdc5fbc-573a-46bc-9eb7-6110457b9d17"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "toolUse": {
+              "toolUseId": "tooluse_nI7ps7nYt61JPG6hpKYofP",
+              "name": "order-tracker___get_order",
+              "input": {
+                "order_id": "ORD-001"
+              }
+            }
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "inputTokens": 1044,
+            "outputTokens": 33,
+            "totalTokens": 1077
+          },
+          "metrics": {
+            "latencyMs": 603,
+            "timeToFirstByteMs": 1259
+          }
+        },
+        "tracking_id": "81f4bfc2-59e9-4755-ab78-243134d39f52"
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "toolResult": {
+              "status": "success",
+              "toolUseId": "tooluse_nI7ps7nYt61JPG6hpKYofP",
+              "content": [
+                {
+                  "text": "{\"order_id\":\"ORD-001\",\"customer_id\":\"CUST-123\",\"status\":\"SHIPPED\",\"items\":[{\"name\":\"Wireless Headphones Pro\",\"qty\":1,\"price\":89.99}],\"total\":89.99,\"tracking_number\":\"TRK987654321\",\"carrier\":\"UPS\",\"estimated_delivery\":\"2026-10-19\"}"
+                }
+              ],
+              "isError": false
+            }
+          }
+        ],
+        "tracking_id": "7c736439-1315-4e88-b18f-8ff3ed12a3ce"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "text": "The order ORD-001 has the following details:\n\n**Status:** SHIPPED  \n**Item:** Wireless Headphones Pro (1 unit at $89.99)  \n**Tracking Details:**  \n- **Tracking Number:** TRK987654321  \n- **Carrier:** UPS  \n- **Estimated Delivery:** 2026-10-19"
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "inputTokens": 1175,
+            "outputTokens": 67,
+            "totalTokens": 1242
+          },
+          "metrics": {
+            "latencyMs": 595,
+            "timeToFirstByteMs": 617
+          }
+        },
+        "tracking_id": "7f9294a2-fc5a-4355-9152-811dd506fba6"
+      }
+    ],
+    "final_result_message": {
+      "role": "assistant",
+      "content": [
+        {
+          "text": "The order ORD-001 has the following details:\n\n**Status:** SHIPPED  \n**Item:** Wireless Headphones Pro (1 unit at $89.99)  \n**Tracking Details:**  \n- **Tracking Number:** TRK987654321  \n- **Carrier:** UPS  \n- **Estimated Delivery:** 2026-10-19"
+        }
+      ],
+      "metadata": {
+        "usage": {
+          "inputTokens": 1175,
+          "outputTokens": 67,
+          "totalTokens": 1242
+        },
+        "metrics": {
+          "latencyMs": 595,
+          "timeToFirstByteMs": 617
+        }
+      },
+      "tracking_id": "7f9294a2-fc5a-4355-9152-811dd506fba6"
+    },
+    "final_answer": "The order ORD-001 has the following details:\n\n**Status:** SHIPPED  \n**Item:** Wireless Headphones Pro (1 unit at $89.99)  \n**Tracking Details:**  \n- **Tracking Number:** TRK987654321  \n- **Carrier:** UPS  \n- **Estimated Delivery:** 2026-10-19\n",
+    "stop_reason": "end_turn"
+  },
+  {
+    "test": "Lambda refund status",
+    "expected_tool": "refund-processor-target___check_refund_status",
+    "prompt": "Use the refund status tool to check refund TEST-REFUND-001. Report the status and estimated processing time returned by the tool. Do not initiate a refund or invent any values.",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "text": "Use the refund status tool to check refund TEST-REFUND-001. Report the status and estimated processing time returned by the tool. Do not initiate a refund or invent any values."
+          }
+        ],
+        "tracking_id": "a680f136-b71b-41a4-b31d-e1dd220d59e1"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "toolUse": {
+              "toolUseId": "tooluse_QX1C42fDtC5ZZtcbOb092Q",
+              "name": "refund-processor-target___check_refund_status",
+              "input": {
+                "refund_id": "TEST-REFUND-001"
+              }
+            }
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "inputTokens": 1283,
+            "outputTokens": 38,
+            "totalTokens": 1321
+          },
+          "metrics": {
+            "latencyMs": 490,
+            "timeToFirstByteMs": 685
+          }
+        },
+        "tracking_id": "c5eb085e-1f95-47f9-b65a-3f7b90274878"
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "toolResult": {
+              "status": "success",
+              "toolUseId": "tooluse_QX1C42fDtC5ZZtcbOb092Q",
+              "content": [
+                {
+                  "text": "{\"statusCode\":200,\"body\":\"{\\\"refund_id\\\": \\\"TEST-REFUND-001\\\", \\\"status\\\": \\\"PROCESSING\\\", \\\"eta\\\": \\\"2-3 business days\\\"}\"}"
+                }
+              ],
+              "isError": false
+            }
+          }
+        ],
+        "tracking_id": "7011e03e-c13d-4996-a69b-48d2195c08e8"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "text": "The refund TEST-REFUND-001 is currently **PROCESSING** with an estimated processing time of **2-3 business days**."
+          }
+        ],
+        "metadata": {
+          "usage": {
+            "inputTokens": 1390,
+            "outputTokens": 28,
+            "totalTokens": 1418
+          },
+          "metrics": {
+            "latencyMs": 487,
+            "timeToFirstByteMs": 614
+          }
+        },
+        "tracking_id": "885bd20e-576f-4a24-9763-b630e460f376"
+      }
+    ],
+    "final_result_message": {
+      "role": "assistant",
+      "content": [
+        {
+          "text": "The refund TEST-REFUND-001 is currently **PROCESSING** with an estimated processing time of **2-3 business days**."
+        }
+      ],
+      "metadata": {
+        "usage": {
+          "inputTokens": 1390,
+          "outputTokens": 28,
+          "totalTokens": 1418
+        },
+        "metrics": {
+          "latencyMs": 487,
+          "timeToFirstByteMs": 614
+        }
+      },
+      "tracking_id": "885bd20e-576f-4a24-9763-b630e460f376"
+    },
+    "final_answer": "The refund TEST-REFUND-001 is currently **PROCESSING** with an estimated processing time of **2-3 business days**.\n",
+    "stop_reason": "end_turn"
+  }
+]

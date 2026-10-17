@@ -1,0 +1,39 @@
+Loaded Gateway tools:
+- order-tracker___get_customer
+- order-tracker___get_customer_orders
+- order-tracker___get_order
+- refund-processor-target___check_refund_status
+- refund-processor-target___get_return_label
+- refund-processor-target___initiate_refund
+
+=== API Gateway order lookup ===
+
+Tool #1: order-tracker___get_order
+The order ORD-001 has the following details:
+
+**Status:** SHIPPED
+**Item:** Wireless Headphones Pro (1 unit at $89.99)
+**Tracking Details:**
+- **Tracking Number:** TRK987654321
+- **Carrier:** UPS
+- **Estimated Delivery:** 2026-10-19Final answer:
+The order ORD-001 has the following details:
+
+**Status:** SHIPPED
+**Item:** Wireless Headphones Pro (1 unit at $89.99)
+**Tracking Details:**
+- **Tracking Number:** TRK987654321
+- **Carrier:** UPS
+- **Estimated Delivery:** 2026-10-19
+
+Messages captured: 4
+
+=== Lambda refund status ===
+
+Tool #2: refund-processor-target___check_refund_status
+The refund TEST-REFUND-001 is currently **PROCESSING** with an estimated processing time of **2-3 business days**.Final answer:
+The refund TEST-REFUND-001 is currently **PROCESSING** with an estimated processing time of **2-3 business days**.
+
+Messages captured: 4
+
+Conversation evidence saved to: /home/manoj/agentcore-fix/evidence/gateway/agent-tool-conversation.json

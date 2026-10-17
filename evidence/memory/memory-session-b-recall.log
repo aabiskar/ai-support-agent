@@ -1,0 +1,30 @@
+WARNING:CSAI_Agent:MEMORY RETRIEVAL HOOK FIRED
+WARNING:CSAI_Agent:MEMORY EVENT: role=user content_type=list
+WARNING:CSAI_Agent:MEMORY QUERY TEXT: Which measurement units do I prefer?
+WARNING:CSAI_Agent:MEMORY RETRIEVAL START: actor=CUST-MEM-CROSSSESSION-20261016 namespaces=['SEMANTIC', 'USER_PREFERENCE']
+WARNING:CSAI_Agent:MEMORY SEARCH RESULT: strategy=SEMANTIC count=1 namespace=cs_agent/CUST-MEM-CROSSSESSION-20261016/facts
+WARNING:CSAI_Agent:MEMORY SEARCH RESULT: strategy=USER_PREFERENCE count=1 namespace=cs_agent/CUST-MEM-CROSSSESSION-20261016/preferences
+WARNING:CSAI_Agent:MEMORY CONTEXT INJECTED: count=2
+WARNING:CSAI_Agent:MEMORY RETRIEVAL HOOK FIRED
+WARNING:CSAI_Agent:MEMORY EVENT: role=assistant content_type=list
+WARNING:CSAI_Agent:MEMORY RETRIEVAL SKIPPED: message is not from user
+WARNING:CSAI_Agent:MEMORY SAVE HOOK FIRED
+WARNING:CSAI_Agent:MEMORY SAVE DATA: query=True response=True
+Actor ID: CUST-MEM-CROSSSESSION-20261016
+Session B ID: memory-test-session-B
+Question: Which measurement units do I prefer?
+Based on your preferences, you prefer **metric units** when discussing measurements. Specifically, you favor using units such as:
+
+- **Kilometers (km)** for distance
+- **Meters (m)** for length
+- **Kilograms (kg)** for mass
+
+These are all part of the **metric system**, which aligns with your stated preference for clarity and consistency in measurements.
+=== SESSION B RESPONSE ===
+Based on your preferences, you prefer **metric units** when discussing measurements. Specifically, you favor using units such as:
+
+- **Kilometers (km)** for distance
+- **Meters (m)** for length
+- **Kilograms (kg)** for mass
+
+These are all part of the **metric system**, which aligns with your stated preference for clarity and consistency in measurements.

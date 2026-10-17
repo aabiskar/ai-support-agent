@@ -1,0 +1,24 @@
+{
+  "test": "Cross-session customer memory recall",
+  "runtime_name": "main_direct_test",
+  "runtime_id": "main_direct_test-FcD8jSCwiz",
+  "runtime_version": "6",
+  "region": "us-east-1",
+  "customer_id": "CUST-METRIC-CROSSSESSION-20261017",
+  "session_a": {
+    "app_session_id": "metric-pref-session-A-20261017",
+    "runtime_session_id": "metric-pref-runtime-A-20261017-unique",
+    "prompt": "Please remember this preference for future conversations: when discussing distances or measurements, I always prefer metric units such as kilometers and meters. Acknowledge briefly. Do not use any tools.",
+    "http_status": 200,
+    "response": "Understood! I'll make sure to always use metric units (kilometers and meters) when discussing distances or measurements in our future conversations."
+  },
+  "session_b": {
+    "app_session_id": "metric-pref-session-B-20261017",
+    "runtime_session_id": "metric-pref-runtime-B-20261017-unique",
+    "prompt": "Which measurement units do I prefer? Answer using my saved preferences. If you cannot find a saved preference, say so rather than guessing.",
+    "http_status": 200,
+    "response": "Based on your saved preferences, you always prefer metric units such as kilometers and meters when discussing distances or measurements. This preference is specifically noted under the categories of measurements, units, and the metric system."
+  },
+  "result": "PASS",
+  "note": "Same customer ID; distinct application session IDs and distinct AgentCore Runtime session IDs."
+}

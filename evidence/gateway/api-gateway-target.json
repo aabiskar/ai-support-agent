@@ -1,0 +1,64 @@
+{
+    "gatewayArn": "arn:aws:bedrock-agentcore:us-east-1:315642819774:gateway/customer-support-gateway-b1pdf7l580",
+    "targetId": "8PD7QZID2D",
+    "createdAt": "2026-10-08T20:11:55.570944+00:00",
+    "updatedAt": "2026-10-08T20:15:40.323597+00:00",
+    "status": "READY",
+    "name": "order-tracker",
+    "targetConfiguration": {
+        "mcp": {
+            "apiGateway": {
+                "restApiId": "glb2zh598f",
+                "stage": "prod",
+                "apiGatewayToolConfiguration": {
+                    "toolOverrides": [
+                        {
+                            "name": "get_customer",
+                            "description": "",
+                            "path": "/customers/{customer_id}",
+                            "method": "GET"
+                        },
+                        {
+                            "name": "get_customer_orders",
+                            "description": "",
+                            "path": "/customers/{customer_id}/orders",
+                            "method": "GET"
+                        },
+                        {
+                            "name": "get_order",
+                            "description": "",
+                            "path": "/orders/{order_id}",
+                            "method": "GET"
+                        }
+                    ],
+                    "toolFilters": [
+                        {
+                            "filterPath": "/customers/{customer_id}",
+                            "methods": [
+                                "GET"
+                            ]
+                        },
+                        {
+                            "filterPath": "/customers/{customer_id}/orders",
+                            "methods": [
+                                "GET"
+                            ]
+                        },
+                        {
+                            "filterPath": "/orders/{order_id}",
+                            "methods": [
+                                "GET"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "credentialProviderConfigurations": [
+        {
+            "credentialProviderType": "GATEWAY_IAM_ROLE"
+        }
+    ],
+    "lastSynchronizedAt": "2026-10-08T20:15:39.079119+00:00"
+}
